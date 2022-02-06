@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlToCsharpTranscriptor", "Library\SqlToCsharpTranscriptor.csproj", "{E6735B9B-E86D-45D2-8675-6A30727E52E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlToCsharpTranscriptorTests", "Tests\SqlToCsharpTranscriptorTests.csproj", "{83BA01C9-9BB3-47B9-8B25-A4B3CBBA9EF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6735B9B-E86D-45D2-8675-6A30727E52E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6735B9B-E86D-45D2-8675-6A30727E52E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6735B9B-E86D-45D2-8675-6A30727E52E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6735B9B-E86D-45D2-8675-6A30727E52E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83BA01C9-9BB3-47B9-8B25-A4B3CBBA9EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83BA01C9-9BB3-47B9-8B25-A4B3CBBA9EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83BA01C9-9BB3-47B9-8B25-A4B3CBBA9EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83BA01C9-9BB3-47B9-8B25-A4B3CBBA9EF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {256D5CBC-2435-40FC-989F-F2CE053FA365}
+	EndGlobalSection
+EndGlobal
