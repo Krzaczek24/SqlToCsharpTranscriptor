@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SqlToCsharpConverter.Constants
+namespace SqlToCsharpTranscriptor.Constants
 {
     internal static class Mapping
     {

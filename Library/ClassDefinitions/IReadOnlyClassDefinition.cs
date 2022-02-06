@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SqlToCsharpConverter.ClassDefinitions
+namespace SqlToCsharpTranscriptor.ClassDefinitions
 {
     public interface IReadOnlyClassDefinition
     {

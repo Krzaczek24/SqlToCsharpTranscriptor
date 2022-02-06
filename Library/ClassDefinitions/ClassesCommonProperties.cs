@@ -1,4 +1,4 @@
-﻿namespace SqlToCsharpConverter.ClassDefinitions
+﻿namespace SqlToCsharpTranscriptor.ClassDefinitions
 {
     internal static class ClassesCommonProperties
     {

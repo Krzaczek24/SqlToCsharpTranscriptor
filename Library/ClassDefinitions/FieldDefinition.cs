@@ -1,4 +1,4 @@
-﻿namespace SqlToCsharpConverter.ClassDefinitions
+﻿namespace SqlToCsharpTranscriptor.ClassDefinitions
 {
     internal class FieldDefinition : IReadOnlyFieldDefinition
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace SqlToCsharpConverter.ClassDefinitions
+namespace SqlToCsharpTranscriptor.ClassDefinitions
 {
     internal class ClassDefinition : IReadOnlyClassDefinition
     {

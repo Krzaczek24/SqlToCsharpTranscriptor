@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace SqlToCsharpConverter
+namespace SqlToCsharpTranscriptor
 {
     public static class Converter
     {

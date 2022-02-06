@@ -1,11 +1,11 @@
-﻿using SqlToCsharpConverter.ClassDefinitions;
-using SqlToCsharpConverter.Constants;
+﻿using SqlToCsharpTranscriptor.ClassDefinitions;
+using SqlToCsharpTranscriptor.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SqlToCsharpConverter
+namespace SqlToCsharpTranscriptor
 {
     public class SqlScriptData
     {
