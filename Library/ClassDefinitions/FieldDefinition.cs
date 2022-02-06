@@ -3,7 +3,9 @@
     internal class FieldDefinition : IReadOnlyFieldDefinition
     {
         public string Name { get; set; }
-        public string Type { get; set; }        
+        public string Type { get; set; }  
+        public bool IsReference { get; set; }
+        public string FullType => IsReference ? ClassesCommonProperties.ClassNamePrefix + Type + ClassesCommonProperties.ClassNameSuffix : Type;
 
         public override bool Equals(object obj)
         {
@@ -26,7 +28,7 @@
 
         public override string ToString()
         {
-            return $"public virtual {Type} {Name} {{ get; set; }}";
+            return $"public virtual {FullType} {Name} {{ get; set; }}";
         }
     }
 }

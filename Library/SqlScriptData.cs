@@ -88,7 +88,8 @@ namespace SqlToCsharpTranscriptor
                     @class.FieldsList.Add(new FieldDefinition()
                     { 
                         Name = foreignKeyField,
-                        Type = foreignKeyType
+                        Type = foreignKeyType,
+                        IsReference = true
                     });
                 }
                 

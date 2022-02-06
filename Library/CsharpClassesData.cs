@@ -99,6 +99,8 @@ namespace SqlToCsharpTranscriptor
 
         public static void SaveClassesToFiles(ICollection<IReadOnlyClassDefinition> classes, string outputDirectoryPath)
         {
+            new DirectoryInfo(outputDirectoryPath).Create();
+
             foreach (var @class in classes)
             {
                 File.WriteAllText(outputDirectoryPath + @class.Name + ".cs", @class.ToString());
