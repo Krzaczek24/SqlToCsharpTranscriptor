@@ -1,1 +1,1 @@
-# SqlToCsharpTranspiler
+# SqlToCsharpTranscriptor
