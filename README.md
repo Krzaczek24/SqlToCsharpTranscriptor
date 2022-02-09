@@ -9,6 +9,7 @@ Converter
   .ConvertToCsharpClasses()
   .SetNamespace("MyNamespace")
   .SetBaseClass("MyCommonFieldsModel")
+  .SetBaseClassNamespace("MyNamespace.Base")
   .SetNamePrefix("My")
   .SetNameSuffix("Model");
   .SaveClassesToFiles("c:\directory\output");
