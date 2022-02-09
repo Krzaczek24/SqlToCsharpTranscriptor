@@ -29,6 +29,13 @@ namespace SqlToCsharpTranscriptor
             return this;
         }
 
+        public CsharpClassesData SetBaseClassDefaultNamespace() { return SetBaseClassNamespace(null); }
+        public CsharpClassesData SetBaseClassNamespace(string @namespace)
+        {
+            ClassesCommonProperties.BaseClassNamespace = @namespace;
+            return this;
+        }
+
         public CsharpClassesData ClearNamePrefix() { return SetNamePrefix(null); }
         public CsharpClassesData SetNamePrefix(string prefix)
         {

@@ -7,6 +7,7 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
         public string Namespace { get; }
         public string Name { get; }
         public string BaseClassName { get; }
+        public string BaseClassNamespace { get; }
         public IReadOnlyCollection<IReadOnlyFieldDefinition> Fields { get; }
     }
 }

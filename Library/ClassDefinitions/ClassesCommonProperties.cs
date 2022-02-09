@@ -18,6 +18,13 @@
             set => baseClassName = GetValueOrDefault(value);
         }
 
+        private static string baseClassNamespace = DEFAULT_NAMESPACE;
+        internal static string BaseClassNamespace
+        {
+            get => baseClassNamespace;
+            set => baseClassNamespace = GetValueOrDefault(value, DEFAULT_NAMESPACE);
+        }
+
         private static string prefix = string.Empty;
         internal static string ClassNamePrefix
         {

@@ -7,6 +7,7 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
     internal class ClassDefinition : IReadOnlyClassDefinition
     {
         private string @namespace;
+        private string baseClassNamespace;
         private string baseClassName;
         private string rawName;
         private string prefix;
@@ -22,6 +23,11 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
         {
             get => ClassNamePrefix + rawName + ClassNameSuffix;
             set => rawName = value;
+        }
+        public virtual string BaseClassNamespace
+        {
+            get => string.IsNullOrWhiteSpace(baseClassNamespace) ? ClassesCommonProperties.BaseClassNamespace : baseClassNamespace;
+            set => baseClassNamespace = value;
         }
         public virtual string BaseClassName
         {
@@ -68,9 +74,13 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
         {
             var sb = new StringBuilder();
 
+            if (Namespace != BaseClassNamespace)
+            {
+                sb.AppendLine($"using {BaseClassNamespace};\n");
+            }
             sb.AppendLine($"namespace {Namespace}");
             sb.AppendLine($"{{");
-            sb.AppendLine($"\tpublic class {Name} {GetBaseClassDerivation()}");
+            sb.AppendLine($"\t{GetClassAccessModifier()} {Name}{GetBaseClassDerivation()}");
             sb.AppendLine($"\t{{");
             foreach (var field in Fields)
             {
@@ -82,9 +92,14 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
             return sb.ToString();
         }
 
+        protected virtual string GetClassAccessModifier()
+        {
+            return "public class";
+        }
+
         private string GetBaseClassDerivation()
         {
-            return string.IsNullOrWhiteSpace(BaseClassName) ? string.Empty : $": {BaseClassName}";
+            return string.IsNullOrWhiteSpace(BaseClassName) ? string.Empty : $" : {BaseClassName}";
         }
     }
 }
