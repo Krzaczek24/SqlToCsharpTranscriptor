@@ -76,7 +76,8 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
 
             if (Namespace != BaseClassNamespace)
             {
-                sb.AppendLine($"using {BaseClassNamespace};\n");
+                sb.AppendLine($"using {BaseClassNamespace};");
+                sb.AppendLine();
             }
             sb.AppendLine($"namespace {Namespace}");
             sb.AppendLine($"{{");

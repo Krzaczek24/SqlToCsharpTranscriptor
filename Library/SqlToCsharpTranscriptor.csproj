@@ -7,7 +7,7 @@
     <RepositoryUrl>https://github.com/Krzaczek24/SqlToCsharpTranscriptor</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageId>SqlToCsharpTranscriptor</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Authors>Tomasz 'Krzaczek' Drewek</Authors>
   </PropertyGroup>
 
