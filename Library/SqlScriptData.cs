@@ -27,7 +27,7 @@ namespace SqlToCsharpTranscriptor
                 HandleMainLines(classes, enumerator);
             }
 
-            return new CsharpClassesData(classes);
+            return new CsharpClassesData(classes).ResetStaticProperties();
         }
 
         private void HandleMainLines(List<ClassDefinition> classes, IEnumerator<string> enumerator)

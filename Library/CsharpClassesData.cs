@@ -162,5 +162,11 @@ namespace SqlToCsharpTranscriptor
                 File.WriteAllText(outputDirectoryPath + @class.Name + ".cs", @class.ToString());
             }
         }
+
+        internal CsharpClassesData ResetStaticProperties()
+        {
+            ClassesCommonProperties.Reset();
+            return this;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SqlToCsharpTranscriptor.ClassDefinitions
+﻿using System.Reflection;
+
+namespace SqlToCsharpTranscriptor.ClassDefinitions
 {
     internal static class ClassesCommonProperties
     {
@@ -54,6 +56,15 @@
         private static string GetValueOrDefault(string value)
         {
             return GetValueOrDefault(value, string.Empty);
+        }
+
+        public static void Reset()
+        {
+            var properties = typeof(ClassesCommonProperties).GetProperties(BindingFlags.NonPublic | BindingFlags.Static);
+            foreach (var property in properties)
+            {
+                property.SetValue(null, null);
+            }
         }
     }
 }

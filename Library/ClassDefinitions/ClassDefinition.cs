@@ -81,14 +81,14 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
                 usings.Add($"using {BaseClassNamespace};");
             if (FieldsList.Any(f => f.IsCollection))
                 usings.Add($"using System.Collections.Generic;");
-            if (FieldsList.Any(f => SystemNamespace.Contains(f.Type)))
+            if (FieldsList.Any(f => SystemNamespace.Any(x => f.Type.StartsWith(x))))
                 usings.Add($"using System;");
             usings.Sort();
 
             var sb = new StringBuilder();
 
             foreach (var @using in usings)
-                sb.Append(@using);
+                sb.AppendLine(@using);
             if (usings.Count > 0)
                 sb.AppendLine();
             sb.AppendLine($"namespace {Namespace}");
