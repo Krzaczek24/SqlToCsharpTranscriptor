@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -6,6 +7,8 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
 {
     internal class ClassDefinition : IReadOnlyClassDefinition
     {
+        private static string[] SystemNamespace { get; } = new[] { nameof(DateTime) };
+
         private string @namespace;
         private string baseClassNamespace;
         private string baseClassName;
@@ -73,21 +76,27 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
 
         public override string ToString()
         {
+            var usings = new List<string>();
+            if (Namespace != BaseClassNamespace)
+                usings.Add($"using {BaseClassNamespace};");
+            if (FieldsList.Any(f => f.IsCollection))
+                usings.Add($"using System.Collections.Generic;");
+            if (FieldsList.Any(f => SystemNamespace.Contains(f.Type)))
+                usings.Add($"using System;");
+            usings.Sort();
+
             var sb = new StringBuilder();
 
-            if (Namespace != BaseClassNamespace)
-            {
-                sb.AppendLine($"using {BaseClassNamespace};");
+            foreach (var @using in usings)
+                sb.Append(@using);
+            if (usings.Count > 0)
                 sb.AppendLine();
-            }
             sb.AppendLine($"namespace {Namespace}");
             sb.AppendLine($"{{");
             sb.AppendLine($"\t{GetClassAccessModifier()} {Name}{GetBaseClassDerivation()}");
             sb.AppendLine($"\t{{");
             foreach (var field in Fields)
-            {
                 sb.AppendLine($"\t\t{field}");
-            }
             sb.AppendLine($"\t}}");
             sb.AppendLine($"}}");
 

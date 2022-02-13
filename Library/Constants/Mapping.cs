@@ -8,7 +8,7 @@ namespace SqlToCsharpTranscriptor.Constants
         {
             { "string", false },
             { "int", true },
-            { "System.DateTime", true },
+            { "DateTime", true },
             { "bool", true },
             { "decimal", true }
         };
@@ -27,8 +27,8 @@ namespace SqlToCsharpTranscriptor.Constants
         {
             { "VARCHAR", "string" },
             { "INT", "int" },
-            { "TIMESTAMP", "System.DateTime" },
-            { "DATETIME", "System.DateTime" },
+            { "TIMESTAMP", "DateTime" },
+            { "DATETIME", "DateTime" },
             { "TINYINT", "bool" },
             { "DECIMAL", "decimal" }
         };
