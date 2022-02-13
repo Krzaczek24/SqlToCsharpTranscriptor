@@ -57,12 +57,12 @@ namespace SqlToCsharpTranscriptor
         private void HandleTableLines(ClassDefinition @class, IEnumerator<string> enumerator)
         {
             Match match;
-            while ((match = Regex.Match(enumerator.Current, @"^\s*`(\w+(\.\w+)*)`\s(\w+)(\(\d+\))?\s(NOT NULL)?")).Success)
+            while ((match = Regex.Match(enumerator.Current, @"^\s*`(\w+(\.\w+)*)`\s(\w+)(\(\d+(\,\d+)?\))?(\sNOT NULL)?(\sDEFAULT)?")).Success)
             {
                 @class.FieldsList.Add(new FieldDefinition()
                 {
                     Name = ConvertNameToPascalCase(match.Groups[1].Value),
-                    Type = Mapping.MapDbTypeToCsharpType(match.Groups[3].Value, !match.Groups[5].Success)
+                    Type = Mapping.MapDbTypeToCsharpType(match.Groups[3].Value, !match.Groups[6].Success, match.Groups[7].Success)
                 });
 
                 if (!enumerator.MoveNext())

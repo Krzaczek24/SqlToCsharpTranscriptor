@@ -9,7 +9,8 @@ namespace SqlToCsharpTranscriptor.Constants
             { "string", false },
             { "int", true },
             { "System.DateTime", true },
-            { "bool", true }
+            { "bool", true },
+            { "decimal", true }
         };
 
         internal static bool IsCsharpTypeNullable(string cSharpType)
@@ -28,7 +29,8 @@ namespace SqlToCsharpTranscriptor.Constants
             { "INT", "int" },
             { "TIMESTAMP", "System.DateTime" },
             { "DATETIME", "System.DateTime" },
-            { "TINYINT", "bool" }
+            { "TINYINT", "bool" },
+            { "DECIMAL", "decimal" }
         };
 
         internal static string MapDbTypeToCsharpType(string dbType)
@@ -41,10 +43,10 @@ namespace SqlToCsharpTranscriptor.Constants
             throw new KeyNotFoundException($"Database type [{dbType.ToUpper()}] has been not found in mapping dictionary.");
         }
 
-        internal static string MapDbTypeToCsharpType(string dbType, bool makeNullable)
+        internal static string MapDbTypeToCsharpType(string dbType, bool makeNullable, bool hasDefault)
         {
             string cSharpType = MapDbTypeToCsharpType(dbType);
-            if (makeNullable && IsCsharpTypeNullable(cSharpType))
+            if (IsCsharpTypeNullable(cSharpType) && (makeNullable || hasDefault))
                 cSharpType += '?';
             return cSharpType;
         }   

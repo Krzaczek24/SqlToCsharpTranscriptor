@@ -18,11 +18,11 @@
             set => baseClassName = GetValueOrDefault(value);
         }
 
-        private static string baseClassNamespace = DEFAULT_NAMESPACE;
+        private static string baseClassNamespace = string.Empty;
         internal static string BaseClassNamespace
         {
-            get => baseClassNamespace;
-            set => baseClassNamespace = GetValueOrDefault(value, DEFAULT_NAMESPACE);
+            get => GetValueOrDefault(baseClassNamespace, Namespace);
+            set => baseClassNamespace = GetValueOrDefault(value);
         }
 
         private static string prefix = string.Empty;
@@ -37,6 +37,13 @@
         {
             get => suffix;
             set => suffix = GetValueOrDefault(value);
+        }
+
+        private static string childrenPropertyName = string.Empty;
+        internal static string ChildrenPropertyName
+        {
+            get => childrenPropertyName;
+            set => childrenPropertyName = GetValueOrDefault(value);
         }
 
         private static string GetValueOrDefault(string value, string defaultValue)

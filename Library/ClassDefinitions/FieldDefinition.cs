@@ -3,9 +3,22 @@
     internal class FieldDefinition : IReadOnlyFieldDefinition
     {
         public string Name { get; set; }
-        public string Type { get; set; }  
+        public string Type { get; set; }
         public bool IsReference { get; set; }
-        public string FullType => IsReference ? ClassesCommonProperties.ClassNamePrefix + Type + ClassesCommonProperties.ClassNameSuffix : Type;
+        public bool IsCollection { get; set; }
+        public string FullType
+        {
+            get
+            {
+                if (IsCollection)
+                    return $"IEnumerable<{TypeWithPrefixAndSuffix}>";
+                else if (IsReference)
+                    return TypeWithPrefixAndSuffix;
+                else
+                    return Type;
+            }
+        }
+        private string TypeWithPrefixAndSuffix => ClassesCommonProperties.ClassNamePrefix + Type + ClassesCommonProperties.ClassNameSuffix;
 
         public override bool Equals(object obj)
         {

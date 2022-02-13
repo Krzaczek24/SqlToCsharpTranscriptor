@@ -8,8 +8,7 @@ namespace SqlToCsharpTranscriptor
     public class CsharpClassesData
     {
         private ICollection<ClassDefinition> classes;
-        private BaseClassDefinition baseClass;
-        public bool IsBaseClassSet => baseClass != null;
+        private BaseClassDefinition baseClass;        
 
         private CsharpClassesData() { }
         internal CsharpClassesData(ICollection<ClassDefinition> classes)
@@ -52,7 +51,7 @@ namespace SqlToCsharpTranscriptor
 
         public CsharpClassesData RemoveBaseClass()
         {
-            if (IsBaseClassSet)
+            if (baseClass != null)
             {
                 foreach (var @class in classes)
                 {
@@ -72,7 +71,7 @@ namespace SqlToCsharpTranscriptor
                 return RemoveBaseClass();
             }
 
-            if (!IsBaseClassSet)
+            if (baseClass == null)
             {
                 var commonFields = ClassDefinition.GetCommonFields(classes);
 
@@ -92,11 +91,61 @@ namespace SqlToCsharpTranscriptor
             return this;
         }
 
+        public CsharpClassesData RemoveChildrenCollectionPropertyName()
+        {
+            if (!string.IsNullOrWhiteSpace(ClassesCommonProperties.ChildrenPropertyName))
+            {
+                var classesWithSelfReferenceChildren = classes.Where(c => c.FieldsList.Any(f => f.IsCollection)).ToList();
+
+                foreach (var @class in classesWithSelfReferenceChildren)
+                {
+                    var children = @class.FieldsList.Single(f => f.IsCollection);
+
+                    @class.FieldsList.Remove(children);
+                }
+
+                ClassesCommonProperties.ChildrenPropertyName = string.Empty;
+            }
+
+            return this;
+        }
+
+        public CsharpClassesData SetChildrenCollectionPropertyName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return RemoveChildrenCollectionPropertyName();
+            }
+
+            var classesWithSelfReference = classes.Where(c => c.FieldsList.Any(f => f.FullType == c.Name && f.IsReference)).ToList();
+
+            if (string.IsNullOrWhiteSpace(ClassesCommonProperties.ChildrenPropertyName))
+            {
+                foreach (var @class in classesWithSelfReference)
+                {
+                    @class.FieldsList.Add(new FieldDefinition()
+                    {
+                        Name = name,
+                        Type = @class.RawName,
+                        IsCollection = true
+                    });
+                }
+            }
+            else if (ClassesCommonProperties.ChildrenPropertyName != name)
+            {
+                classesWithSelfReference.SelectMany(c => c.FieldsList).Where(f => f.IsCollection).ToList().ForEach(f => f.Name = name);
+            }
+
+            ClassesCommonProperties.ChildrenPropertyName = name;
+
+            return this;
+        }
+
         public void SaveClassesToFiles(string outputDirectoryPath)
         {
             var classesDefinitions = GetClassesDefinitions().ToList();
 
-            if (IsBaseClassSet)
+            if (baseClass != null)
             {
                 classesDefinitions = classesDefinitions.Prepend(baseClass).ToList();
             }

@@ -37,6 +37,7 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
         public virtual IReadOnlyCollection<IReadOnlyFieldDefinition> Fields => FieldsList.ToList().AsReadOnly();
         #endregion INTERFACE THINGS
 
+        internal virtual string RawName => rawName;
         internal virtual string ClassNamePrefix
         {
             get => string.IsNullOrWhiteSpace(prefix) ? ClassesCommonProperties.ClassNamePrefix : prefix;
