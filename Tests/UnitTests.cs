@@ -14,7 +14,8 @@ namespace SqlToCsharpConverterTests
         private const string BASE_CLASS_NAME = "MyBaseClassName";
         private const string PREFIX = "Prefix";
         private const string SUFFIX = "Suffix";
-        
+        private const string ACCESS_MODIFIER = "internal";
+
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
@@ -91,6 +92,23 @@ namespace SqlToCsharpConverterTests
                 .SetBaseClass(BASE_CLASS_NAME)
                 .SetNamespace(@namespace)
                 .SetNameSuffix(SUFFIX)
+                .SaveClassesToFiles(GetOutputDirectoryPath(@namespace));
+
+            VerifyIfFilesAreTheSame(@namespace);
+        }
+
+        [Test]
+        [Order(5)]
+        public void Test_FileNames_WithChangedAccessModifier()
+        {
+            string @namespace = "WithChangedAccessModifier";
+
+            Converter
+                .LoadSqlScriptData(TEST_INPUT_FILE_PATH)
+                .ConvertToCsharpClasses()
+                .SetBaseClass(BASE_CLASS_NAME)
+                .SetAccessModifier(ACCESS_MODIFIER)
+                .SetNamespace(@namespace)
                 .SaveClassesToFiles(GetOutputDirectoryPath(@namespace));
 
             VerifyIfFilesAreTheSame(@namespace);

@@ -15,6 +15,7 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
         private string rawName;
         private string prefix;
         private string suffix;
+        private string accessModifier;
 
         #region INTERFACE THINGS
         public virtual string Namespace
@@ -41,6 +42,7 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
         #endregion INTERFACE THINGS
 
         internal virtual string RawName => rawName;
+        internal virtual string ClassKeyword => "class";
         internal virtual string ClassNamePrefix
         {
             get => string.IsNullOrWhiteSpace(prefix) ? ClassesCommonProperties.ClassNamePrefix : prefix;
@@ -50,6 +52,11 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
         {
             get => string.IsNullOrWhiteSpace(suffix) ? ClassesCommonProperties.ClassNameSuffix : suffix;
             set => suffix = value;
+        }
+        internal virtual string AccessModifier
+        {
+            get => string.IsNullOrWhiteSpace(accessModifier) ? ClassesCommonProperties.AccessModifier : accessModifier;
+            set => accessModifier = value;
         }
         internal virtual ICollection<FieldDefinition> FieldsList { get; set; } = new List<FieldDefinition>();
 
@@ -93,7 +100,7 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
                 sb.AppendLine();
             sb.AppendLine($"namespace {Namespace}");
             sb.AppendLine($"{{");
-            sb.AppendLine($"\t{GetClassAccessModifier()} {Name}{GetBaseClassDerivation()}");
+            sb.AppendLine($"\t{AccessModifier} {ClassKeyword} {Name}{GetBaseClassDerivation()}");
             sb.AppendLine($"\t{{");
             foreach (var field in Fields)
                 sb.AppendLine($"\t\t{field}");
@@ -101,11 +108,6 @@ namespace SqlToCsharpTranscriptor.ClassDefinitions
             sb.AppendLine($"}}");
 
             return sb.ToString();
-        }
-
-        protected virtual string GetClassAccessModifier()
-        {
-            return "public class";
         }
 
         private string GetBaseClassDerivation()

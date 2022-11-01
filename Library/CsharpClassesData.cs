@@ -49,6 +49,13 @@ namespace SqlToCsharpTranscriptor
             return this;
         }
 
+        public CsharpClassesData ClearAccessModifier() { return SetAccessModifier(null); }
+        public CsharpClassesData SetAccessModifier(string accessModifier)
+        {
+            ClassesCommonProperties.AccessModifier = accessModifier;
+            return this;
+        }
+
         public CsharpClassesData RemoveBaseClass()
         {
             if (baseClass != null)
@@ -155,7 +162,9 @@ namespace SqlToCsharpTranscriptor
 
         public static void SaveClassesToFiles(ICollection<IReadOnlyClassDefinition> classes, string outputDirectoryPath)
         {
-            new DirectoryInfo(outputDirectoryPath).Create();
+            var outputDirectory = new DirectoryInfo(outputDirectoryPath);
+            try { outputDirectory.Delete(true); } catch { }
+            outputDirectory.Create();
 
             foreach (var @class in classes)
             {
